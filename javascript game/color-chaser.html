@@ -1,0 +1,147 @@
+
+<html>
+<head>
+
+<title>Tap-The-Color</title>
+<style>
+  :root{--size:72px}
+  body{display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:system-ui,Segoe UI,Arial;background:#f3f6fb}
+  .card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,.08);text-align:center;width:320px}
+  h1{font-size:18px;margin:0 0 8px;color:#2b6cb0}
+  .hud{display:flex;justify-content:space-between;margin-bottom:10px;font-weight:700;color:#333}
+  .target{display:inline-flex;gap:8px;align-items:center}
+  .dot{width:18px;height:18px;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+  .grid{display:grid;grid-template-columns:repeat(3,var(--size));gap:10px;justify-content:center;margin:8px 0}
+  .tile{width:var(--size);height:var(--size);border-radius:10px;cursor:pointer;box-shadow:0 6px 18px rgba(2,6,23,.08);border:3px solid transparent;transition:transform .08s}
+  .tile:active{transform:scale(.96)}
+  .footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;color:#555}
+  button.small{padding:6px 10px;border-radius:8px;border:none;background:#2b6cb0;color:#fff;cursor:pointer}
+  .msg{font-weight:700;color:#2b6cb0}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Tap-The-Color</h1>
+    <div class="hud">
+      <div>Score: <span id="score">0</span></div>
+      <div class="target">Target: <div id="target-dot" class="dot" aria-hidden="true"></div></div>
+      <div>Time: <span id="time">10</span>s</div>
+    </div>
+
+    <div id="grid" class="grid" aria-label="color grid"></div>
+
+    <div class="footer">
+      <div class="msg" id="msg"></div>
+      <button id="start" class="small">Start</button>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const COLORS = ["#ff6b6b","#ffb86b","#ffd56b","#6bd6a9","#4b7bec","#9b7bff"];
+  const grid = document.getElementById("grid");
+  const targetDot = document.getElementById("target-dot");
+  const scoreEl = document.getElementById("score");
+  const timeEl = document.getElementById("time");
+  const msg = document.getElementById("msg");
+  const startBtn = document.getElementById("start");
+
+  let target, score=0, timerId=null, timeLeft=10;
+
+  function makeGrid(){
+    grid.innerHTML = "";
+    for(let i=0;i<9;i++){
+      const b = document.createElement("button");
+      b.className = "tile";
+      b.dataset.idx = i;
+      b.addEventListener("click", onTileClick);
+      grid.appendChild(b);
+    }
+  }
+
+  function pickTarget(){
+    target = COLORS[Math.floor(Math.random()*COLORS.length)];
+    targetDot.style.background = target;
+  }
+
+  function fillTiles(){
+    const tiles = Array.from(grid.children);
+    tiles.forEach(t => {
+      t.style.background = COLORS[Math.floor(Math.random()*COLORS.length)];
+      t.style.borderColor = "transparent";
+    });
+    // ensure at least one correct tile
+    const correctIndex = Math.floor(Math.random()*tiles.length);
+    tiles[correctIndex].style.background = target;
+  }
+
+  function onTileClick(e){
+    if(!timerId) return;
+    const color = e.currentTarget.style.background;
+    if(color === target){
+      score++;
+      scoreEl.textContent = score;
+      showFlash(e.currentTarget, true);
+      nextRound();
+    } else {
+      showFlash(e.currentTarget, false);
+      // small penalty
+      timeLeft = Math.max(1, timeLeft - 2);
+      updateTime();
+    }
+  }
+
+  function showFlash(el, good){
+    el.style.borderColor = good ? "#16a34a" : "#ef4444";
+    setTimeout(()=> el.style.borderColor = "transparent", 250);
+  }
+
+  function updateTime(){
+    timeEl.textContent = timeLeft;
+  }
+
+  function tick(){
+    timeLeft--;
+    updateTime();
+    if(timeLeft <= 0){
+      endGame();
+    }
+  }
+
+  function startGame(){
+    clearInterval(timerId);
+    score = 0;
+    scoreEl.textContent = score;
+    timeLeft = 10;
+    updateTime();
+    pickTarget();
+    fillTiles();
+    msg.textContent = "";
+    timerId = setInterval(tick, 1000);
+    
+    startBtn.disabled = true;
+  }
+
+  function nextRound(){
+    pickTarget();
+    fillTiles();
+  }
+
+  function endGame(){
+    clearInterval(timerId);
+    timerId = null;
+    msg.textContent = `Game over — Score ${score}`;
+    startBtn.disabled = false;
+  }
+
+  // init
+  makeGrid();
+  pickTarget();
+  fillTiles();
+  updateTime();
+
+  startBtn.addEventListener("click", startGame);
+})();
+</script>
+</body>
+</html>
