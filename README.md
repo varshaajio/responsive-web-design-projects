@@ -32,4 +32,7 @@ Each project is built with **HTML5** and **CSS3**, focusing on responsive layout
 ### 7. Responsive Web design using HTML form elements
 - 🔗 [Live Demo](https://varshaajio.github.io/responsive-web-design-projects/responsive-web-design/)
 - 📁 [Source Code](./responsive-web-design/)
+### 8. Figma design to HTML 
+- 🔗 [Live Demo](https://varshaajio.github.io/responsive-web-design-projects/figma-design/)
+- 📁 [Source Code](./figma-design/)
 ---
