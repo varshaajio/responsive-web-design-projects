@@ -24,4 +24,11 @@ Each project is built with **HTML5** and **CSS3**, focusing on responsive layout
 ### 5. Technical Documentation Page
 - 🔗 [Live Demo](https://varshaajio.github.io/-responsive-web-design-projects-/technical-documentation-page/)
 - 📁 [Source Code](./technical-documentation-page/)
+### 6. JavaScript game
+- 🔗 [Live Demo](https://varshaajio.github.io/-responsive-web-design-projects-/javascript-puzzle/)
+- 📁 [Source Code](./javascript-puzzle/)
+### 7. Responsive Web design using HTML form elements
+- 🔗 [Live Demo](https://varshaajio.github.io/-responsive-web-design-projects-/responsive-web-design/)
+- 📁 [Source Code](./responsive-web-design/)
+
 ---
