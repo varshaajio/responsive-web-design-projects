@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta name="viewport" />
   <title>Tap-The-Color</title>
   <style>
     :root{--size:72px}
     body{display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:system-ui,Segoe UI,Arial;background:#f3f6fb}
-    .card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.08);text-align:center;width:320px}
+    .card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,.08);text-align:center;width:320px}
     h1{font-size:18px;margin:0 0 8px;color:#2b6cb0}
     .hud{display:flex;justify-content:space-between;margin-bottom:10px;font-weight:700;color:#333}
     .target{display:inline-flex;gap:8px;align-items:center}
-    .dot{width:18px;height:18px;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.12)}
+    .dot{width:18px;height:18px;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.12)}
     .grid{display:grid;grid-template-columns:repeat(3,var(--size));gap:10px;justify-content:center;margin:8px 0}
     .tile{width:var(--size);height:var(--size);border-radius:10px;cursor:pointer;box-shadow:0 6px 18px rgba(2,6,23,.08);border:3px solid transparent;transition:transform .08s}
     .tile:active{transform:scale(.96)}
@@ -23,17 +24,19 @@
   <div class="card" role="application" aria-labelledby="title">
     <h1 id="title">Tap-The-Color</h1>
 
-    <div class="hud" aria-hidden="false">
+    <div class="hud">
       <div>Score: <span id="score">0</span></div>
-      <div class="target" aria-live="polite">Target: <div id="target-dot" class="dot" aria-hidden="true"></div></div>
+      <div class="target" role="group" aria-label="Target color">
+        Target: <div id="target-dot" class="dot" title="Target color"></div>
+      </div>
       <div>Time: <span id="time">10</span>s</div>
     </div>
 
-    <div id="grid" class="grid" aria-label="color grid"></div>
+    <div id="grid" class="grid" role="grid" aria-label="Color grid"></div>
 
     <div class="footer">
       <div class="msg" id="msg" aria-live="polite"></div>
-      <button id="start" class="small" aria-pressed="false">Start</button>
+      <button id="start" class="small" title="Start the game">Start</button>
     </div>
   </div>
 
