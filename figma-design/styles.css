@@ -127,13 +127,14 @@ body{
 .mobile-menu{
   display:none;
   flex-direction:column;
-  gap:12px;
-  padding:18px;
-  background:#fff;
+  gap:50px;
+  padding:50px;
+  background: #FFE3E8;
   border-bottom:1px solid rgba(0,0,0,0.06);
+  
 }
 .mobile-menu a{display:flex;align-items:center;gap:12px;color:#282828;text-decoration:none;font-size:18px}
-.mobile-menu .btn-primary{margin-top:8px;padding:12px 16px;border-radius:10px;display:inline-block;background:var(--primary);color:#fff;text-decoration:none}
+.mobile-menu .btn-primary{text-align:center;margin-top:8px;padding:12px 16px;width: 80%;border-radius:30px;display:inline-block;background:var(--primary);color:#fff;text-decoration:none}
 
 /* ---------------------------
    HERO
@@ -163,12 +164,26 @@ body{
 .btn-primary{background:var(--primary);color:#fff;width:157px}
 
 /* right column composition */
-.hero-right{position:absolute;left:766px;top:190px;width:633.87px;height:727.37px;z-index:1}
+.hero-right{position:absolute;left:726px;top:170px;width:633.87px;height:727.37px;z-index:1}
 .ellipse{position:absolute;border-radius:50%}
 .ellipse-6{width:633.87px;height:633.88px;left:0;top:93.49px;background:radial-gradient(circle at 50% 44.74%,#FFE4E9 0%,#FFCBD4 100%)}
 .ellipse-5{width:476.45px;height:476.45px;left:78.23px;top:179.68px;background:radial-gradient(circle at 50% 50%,#FECDD5 0%,#FFE2E7 100%)}
-.portrait{position:absolute;left:45px;top:0;width:506px;height:727px;z-index:2}
-.portrait img{width:506px;height:727px;object-fit:cover;display:block}
+.portrait {
+  position: relative;
+  width: 100%;
+  max-width: 506px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.portrait img {
+  width: 120%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
+}
+
 
 /* stats cards */
 .stat-card{position:absolute;background:rgba(255,255,255,0.79);backdrop-filter:blur(20px);border-radius:10px;display:flex;align-items:center;gap:20px;padding:20px 15px}
@@ -209,11 +224,49 @@ body{
   .nav{display:none}
   .mobile-menu{display:none}
   .hero-section{height:auto;padding-bottom:40px}
-  .hero-left{position:relative;left:auto;top:24px;width:100%;padding:0 24px}
+  .hero-sub{width:100%}
+  .hero-left{position:relative;left:auto;top:24px;width:auto;padding:0 24px}
   .hero-title{font-size:34px;line-height:40px}
   .title-underline{width:220px;bottom:-6px}
+  .hero-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* Outline button (top) */
+.btn-outline {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 12px rgba(250, 18, 57, 0.58);
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Filled button (bottom) */
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(250, 18, 57, 0.3);
+}
   .portrait img{width:320px;height:auto}
-  .hero-right{position:relative;left:auto;top:auto;width:100%;display:flex;justify-content:center;margin-top:8px}
+  .hero-right{position:relative;left:auto;top:50px;width:100%;justify-content:center;margin-top:8px}
   .stat-card{position:relative;left:auto;top:auto;margin:12px 8px;width:auto}
   .features{padding:30px 20px}
   .feature-grid{grid-template-columns:1fr;gap:18px}
